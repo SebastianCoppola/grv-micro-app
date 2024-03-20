@@ -1,0 +1,11 @@
+<svg id="Icon_deleted" data-name="Icon deleted" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+    <defs>
+        <style>
+            .cls-2{fill:#747474}
+        </style>
+    </defs>
+    <path id="Trazado_129" data-name="Trazado 129" class="cls-2" d="M10.75 16.5a.726.726 0 0 1-.725-.725v-7.05a.725.725 0 1 1 1.45 0v7.05a.726.726 0 0 1-.725.725z"/>
+    <path id="Trazado_130" data-name="Trazado 130" class="cls-2" d="M8.371 16.486a.707.707 0 0 1-.782-.621l-.624-7.127a.726.726 0 0 1 1.444-.126l.625 7.126a.708.708 0 0 1-.663.748z"/>
+    <path id="Trazado_131" data-name="Trazado 131" class="cls-2" d="M13.129 16.486a.706.706 0 0 1-.663-.745l.622-7.1a.726.726 0 0 1 1.445.126l-.623 7.1a.7.7 0 0 1-.781.619z"/>
+    <path id="Trazado_132" data-name="Trazado 132" class="cls-2" d="M18.5 5H15V4a1.5 1.5 0 0 0-1.5-1.5H8A1.5 1.5 0 0 0 6.5 4v1H3a.5.5 0 0 0-.5.5V6a.5.5 0 0 0 .5.5h.75L4.957 19a.5.5 0 0 0 .5.452h10.589a.5.5 0 0 0 .5-.452l1.2-12.5h.75A.5.5 0 0 0 19 6v-.5a.5.5 0 0 0-.5-.5zM8 4h5.5v1H8zm7.141 14H6.365L5.257 6.5h10.986z"/>
+</svg>
