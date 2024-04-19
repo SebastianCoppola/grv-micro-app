@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="ICO_Consultas" width="20" height="20" viewBox="0 0 20 20">
+    <defs>
+        <style>
+            .cls-2{fill:#fff}
+        </style>
+    </defs>
+    <path id="Rectángulo_145631" fill="none" d="M0 0H20V20H0z"/>
+    <g id="grid-alt" transform="translate(1 1)">
+        <path id="Trazado_44" d="M5.85 0H.984A1 1 0 0 0 0 .984v4.81a.991.991 0 0 0 .984.956H5.85a.906.906 0 0 0 .9-.9V.9a.968.968 0 0 0-.9-.9zm-.591 5.259H1.491V1.491h3.74v3.768z" class="cls-2"/>
+        <path id="Trazado_45" d="M5.766 40H.9a.968.968 0 0 0-.9.9v4.866a.984.984 0 0 0 .9.984h4.866a.991.991 0 0 0 .984-.816V40.9a.984.984 0 0 0-.984-.9zm-.506 5.259H1.491v-3.768h3.74v3.769z" class="cls-2" transform="translate(0 -28.75)"/>
+        <path id="Trazado_46" d="M46.066 40H41.2a.906.906 0 0 0-.9.9v4.866a.906.906 0 0 0 .9.9h4.866a.958.958 0 0 0 .9-.816v-5.034a.964.964 0 0 0-.9-.816zm-.591 5.259h-3.769v-3.768h3.741v3.769z" class="cls-2" transform="translate(-28.966 -28.75)"/>
+        <path id="Trazado_47" d="M45.85 0h-4.866A1 1 0 0 0 40 .984v4.81a1 1 0 0 0 .984.984h4.866a.906.906 0 0 0 .9-.9V.9a.968.968 0 0 0-.9-.9zm-.591 5.259h-3.768V1.491h3.741v3.768z" class="cls-2" transform="translate(-28.75)"/>
+    </g>
+</svg>

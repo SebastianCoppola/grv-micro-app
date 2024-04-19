@@ -1,17 +1,18 @@
-import { EmojiObjects } from '@material-ui/icons';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
+//Redux:
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../../redux/actions/index'
-import { PRESTACION_NOMENCLADA } from '../../../../Utils/const';
-import CustomPrestaciones from '../CustomPrestaciones';
+//Components:
+import CustomPrestaciones from '../CustomPrestaciones'
 
-const PrestacionesNomencladas = props => {
-    const { setTituloHeader } = props;
-    const dispatch = useDispatch();
+const PrestacionesNomencladas = () => {
+
+    const dispatch = useDispatch()
     const dataNomencladas = useSelector(state => state.prestaciones.prestacionesNomencladas)
+
     const [request, setRequest] = useState(null)
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [page, setPage] = useState(0)
+    const [rowsPerPage, setRowsPerPage] = useState(5)
     const [requestIncluir, setRequestIncluir] = useState(null)
     const [data, setData] = useState({ objetos: [] })
     const [tipoOrdenamiento, setTipoOrdenamiento] = useState(1)
@@ -20,10 +21,6 @@ const PrestacionesNomencladas = props => {
     const [updateTable, setUpdateTable] = useState(false)
 
     useEffect(() => setData(dataNomencladas), [dataNomencladas])
-
-    useEffect(() => {
-        setTituloHeader(PRESTACION_NOMENCLADA);
-    }, []);
 
     useEffect(() => {
         let requestListar = {
@@ -35,8 +32,6 @@ const PrestacionesNomencladas = props => {
         }
         dispatch(actions.listarPrestacionesNomencladas(requestListar, true))
     }, [page, rowsPerPage, tipoOrdenamiento, criterioOrdenamiento, criterioBusqueda, updateTable])
-
-
 
     return (
         <CustomPrestaciones

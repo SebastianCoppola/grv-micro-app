@@ -162,6 +162,7 @@ const TablaProveedores = (props) => {
             />
         }
     ]
+
      //CANCELA LA CONFIRMACION DE AGREGAR O EDITAR UN SUBPRESTADOR
      const cancelarConfirmacion = () => {
         setOpenConfirmacion(false)
@@ -222,6 +223,7 @@ const TablaProveedores = (props) => {
 
             </Grid> </>)
     }
+
     const headerTablaProveedor = [
         {
             title: "NOMBRE FANTASIA y RAZON SOCIAL",
@@ -229,7 +231,9 @@ const TablaProveedores = (props) => {
             headerStyle: { color: '#747474', minWidth: '350px' },
             render: row => (
                 <Tooltip title={row.nombreRazonSocial}>
-                    <Typography style={{fontSize: '12px'}}>{recortarRow(row && row.nombreRazonSocial ? row.nombreRazonSocial : "-")}</Typography>
+                    <Typography style={{fontSize: '12px'}}>
+                        {recortarRow(row && row.nombreRazonSocial ? row.nombreRazonSocial : "-")}
+                    </Typography>
                 </Tooltip>
             )
         },
@@ -240,7 +244,7 @@ const TablaProveedores = (props) => {
         },
         {
             title: "TIPO", field: "tipo",
-            cellStyle: { color: '#505050', minWidth: '250px', fontSize: '10px' },
+            cellStyle: { color: '#505050', fontSize: '10px' },
             headerStyle: { color: '#747474', fontSize: '12px' },
             render: row => (
                 <Grid container alignItems={'center'} >
@@ -262,18 +266,18 @@ const TablaProveedores = (props) => {
         {
             title: "LOCALIDAD Y PROVINCIA",
             cellStyle: { color: '#505050' }, field: "localidadProvincia",
-            cellStyle: { minWidth: '250px', fontSize: '12px' },
+            cellStyle: { fontSize: '12px' },
             headerStyle: { color: '#747474', fontSize: '12px' },
 
         },
         {
             title: "TELÉFONO", field: "telefono",
-            cellStyle: { color: '#505050', width: '150px',fontSize: '12px' },
+            cellStyle: { color: '#505050', fontSize: '12px' },
             headerStyle: { color: '#747474', fontSize: '12px' }
         },
         {
             title: "ESTADO", field: "estado",
-            cellStyle: { color: '#505050', width: '150px', fontSize: '12px' },
+            cellStyle: { color: '#505050', fontSize: '12px' },
             headerStyle: { color: '#747474', fontSize: '12px' },
             render: (data) => {
 
@@ -368,7 +372,7 @@ const TablaProveedores = (props) => {
     }
 
     return (
-        <div>
+        <Grid container>
             <Grid container alignItems='center' justify={'center'} spacing={1}>
                 <Grid item xs={12}>
                     <CustomTableContrataciones
@@ -434,7 +438,7 @@ const TablaProveedores = (props) => {
                     snack={true}
                 />
             }
-        </div>
+        </Grid>
     )
 }
 

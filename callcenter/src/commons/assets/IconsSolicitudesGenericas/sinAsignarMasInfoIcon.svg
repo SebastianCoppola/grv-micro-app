@@ -1,0 +1,7 @@
+<svg data-name="ico-solicitudes+info" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+    <g data-name="Rectángulo 145648" style="fill:rgba(255,112,82,.1);stroke:#ff7052;stroke-dasharray:3 2">
+        <rect width="50" height="50" rx="4" style="stroke:none"/>
+        <rect x=".5" y=".5" width="49" height="49" rx="3.5" style="fill:none"/>
+    </g>
+    <path data-name="Path / comment-plus-outline" d="M9 22a1 1 0 0 1-1-1v-3H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6.1l-3.7 3.71a1.019 1.019 0 0 1-.7.29H9m1-6v3.08L13.08 16H20V4H4v12h6m1-10h2v3h3v2h-3v3h-2v-3H8V9h3z" style="fill:#ff7052" transform="translate(13 13)"/>
+</svg>

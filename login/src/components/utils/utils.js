@@ -1,7 +1,8 @@
-import { PORTAL_CLIENTE_APP } from "./const";
-import { URL_FRONT_PORTAL_CLIENTE, URL_FRONT_UI } from "./url";
+import { PORTAL_CLIENTE_APP } from "./const"
+import { URL_FRONT_PORTAL_CLIENTE, URL_FRONT_UI } from "./url"
 
 class Utils {
+
     static usuarioConPermisos(roles) {
         if (roles) {
             let rol = roles.filter(it => it === 'Supervisor' || it === 'Operador')
@@ -11,18 +12,17 @@ class Utils {
         }
         return false;
     }
+
     //Valida el area del usuario que se loguea y lo redirige a la app de esa área:
-    static verificarAreaUsuarioLogueadoYRedireccion = (datosUsuario) => {
+    static verificarAreaUsuarioLogueadoYRedireccion = (appUsuarios) => {
         //valido que tenga un solo valor en el atributo APP de keycloak
-        if( datosUsuario.apps.length == 1 ) {
-            switch (datosUsuario.apps[0]) {
+        if(appUsuarios.length == 1) {
+            if(appUsuarios[0] === PORTAL_CLIENTE_APP){
                 //PORTAL_CLIENTES
-                case PORTAL_CLIENTE_APP:
-                    window.location.href = URL_FRONT_PORTAL_CLIENTE
-                    break;
-                //CEM
-                default:
-                    window.location.href = URL_FRONT_UI
+                window.location.href = URL_FRONT_PORTAL_CLIENTE
+            }else{
+                console.log('a punto de redirigir')
+                window.location.href = URL_FRONT_UI
             }
         } else {
             //En caso de tener mas de un tributo se redirige al front que agrupa disitintas areas

@@ -20,11 +20,16 @@ const theme = createTheme({
 	}
 })
 
-function App({ usuarioActivo, initialPath, history }) {
+function App({ usuarioActivo, history, rutasProveedores, rutasCallCenter }) {
 
 	return (
 		<ThemeProvider theme={theme}>		
-			<Inicio usuarioActivo={usuarioActivo} history={history} />
+			<Inicio 
+				usuarioActivo={usuarioActivo} 
+				history={history} 
+				rutasProveedores={rutasProveedores}
+				rutasCallCenter={rutasCallCenter}
+			/>
 		</ThemeProvider>
 	)
 }

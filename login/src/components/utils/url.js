@@ -16,7 +16,7 @@ export const FECTH_URL_LOGIN = `/api${PORT_LOGIN}${CONTEXT_LOGIN}/login/token`
 export const FETCH_URL_FACE_RECOGNITION_VALIDATE = `/api${PORT_LOGIN}${CONTEXT_LOGIN}/login/verify-face-recognition-required`
 
 //REDIRECCIONES
-export const URL_FRONT_UI = `${URL_HOME}${URL_PORT_HOME}/home`;
+export const URL_FRONT_UI = `${URL_HOME}${URL_PORT_HOME}`;
 export const URL_FRONT_PORTAL_CLIENTE = `${URL_HOME}${URL_PORT_PORTAL_CLIENTES}/portal/home`
 
 //Notificaciones

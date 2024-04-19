@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import PercentageSheetIcon from '../../../../commons/assets/Contrataciones/ConvenioTraslado/file-percent-outline.svg';
 import { Box, Drawer, Grid, IconButton, Typography, makeStyles } from '@material-ui/core';
 import CustomTypography from '../../../commons/Typography/CustomTypography';

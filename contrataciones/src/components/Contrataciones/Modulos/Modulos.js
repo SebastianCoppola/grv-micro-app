@@ -1,68 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import { BUSCAR } from '../../../Utils/const';
+import React, { useEffect, useState } from 'react'
+//Utils:
+import { BUSCAR } from '../../../Utils/const'
 //Redux:
-import { useDispatch, useSelector } from 'react-redux';
-import * as action from '../../../redux/actions/index';
+import { useDispatch, useSelector } from 'react-redux'
+import * as action from '../../../redux/actions/index'
 //Img:
 import SVGiconEdit from '../../../commons/assets/Icon-edit.svg'
 import IconExcel from '../../../commons/assets/Contrataciones/Modulos/file-excel-outline-modulos.png'
 import SVGiconInclusion from '../../../commons/assets/Contrataciones/Modulos/format-list-bulleted-square.svg'
 //Material:
-import { Grid, IconButton, makeStyles } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
+import { Grid, IconButton } from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
 //Components:
-import DrawerModulo from './DrawerModulo';
-import DrawerInclusiones from './DrawerInclusiones';
-import BuscadorContrataciones from '../../commons/Buscador/BuscadorContrataciones';
-import CustomButton from '../../commons/Button/CustomButton';
-import CustomTableContrataciones from '../../commons/Table/CustomTableContrataciones';
-import Drawer2 from '../../commons/CustomDrawer/Drawer';
-import AdminSlide from '../../commons/Slider/AdminSlide';
-import DrawerConvenios from './DrawerConvenios';
-import CustomAlert from '../../commons/CustomAlert/customAlert';
-import CustomSnackBar from '../../commons/SnackBar/CustomSnackBar';
+import DrawerModulo from './DrawerModulo'
+import DrawerInclusiones from './DrawerInclusiones'
+import BuscadorContrataciones from '../../commons/Buscador/BuscadorContrataciones'
+import CustomButton from '../../commons/Button/CustomButton'
+import CustomTableContrataciones from '../../commons/Table/CustomTableContrataciones'
+import Drawer2 from '../../commons/CustomDrawer/Drawer'
+import AdminSlide from '../../commons/Slider/AdminSlide'
+import DrawerConvenios from './DrawerConvenios'
+import CustomAlert from '../../commons/CustomAlert/customAlert'
+import CustomSnackBar from '../../commons/SnackBar/CustomSnackBar'
 import CustomLoader from '../../commons/Loading/CustomLoading'
 
-const useStyles = makeStyles({
-    root: {
-        flexGrow: 1
-    },
-    iconEditar: {
-        "&:hover": {
-            backgroundColor: "transparent",
-        },
-        borderRadius: '5px',
-        border: '1px solid #d3d3d3',
-        width: "40px",
-        height: "40px",
-        marginLeft: '4px'
-    }
-});
+const Modulos = () => {
 
-const Modulos = props => {
-    const { setTituloHeader } = props;
-    const classes = useStyles(props);
-    //Confimation: 
-    const [openAlert1, setOpenAlert] = useState({ "open": false, "mensaje": null });
-    const [openSnackBar, setOpenSnackBar] = useState({ "open": false, "title": '', "severity": '' });
+    const classes = {}
     //Redux:
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const datos = useSelector(state => state.moduloConvenio.modulosListado)
     const loadingListadoModulo = useSelector(state => state.moduloConvenio.loadingListadoModulo)
     const loadingSaveEditModulo = useSelector(state => state.moduloConvenio.loadingSaveEditModulo)
     const loadingImpactarConvenios = useSelector(state => state.moduloConvenio.loadingImpactarConvenios);
+    //Confimation: 
+    const [openAlert1, setOpenAlert] = useState({ "open": false, "mensaje": null })
+    const [openSnackBar, setOpenSnackBar] = useState({ "open": false, "title": '', "severity": '' })
     //CustomTable:
     const cellStyle = { color: '#505050', fontSize: '12px', alignContent: 'left' }
     const headerStyle = { color: '#747474', fontSize: '13px', alignContent: 'left' }
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [rowId, setRowId] = useState(null)
+    const [page, setPage] = useState(0)
+    const [rowsPerPage, setRowsPerPage] = useState(5)
     //Drawers
-    const [openDrawer, setOpenDrawer] = useState({ top: false, left: false, bottom: false, right: false });
-    const [modoInclusiones, setModoInclusiones] = useState(false);
-    const [modoEditarModulo, setModoEditarModulo] = useState(false);
-    const [modoCrearModulo, setModoCrearModulo] = useState(false);
-    const [modoConvenios, setModoConvenios] = useState(false);
+    const [openDrawer, setOpenDrawer] = useState({ top: false, left: false, bottom: false, right: false })
+    const [modoInclusiones, setModoInclusiones] = useState(false)
+    const [modoEditarModulo, setModoEditarModulo] = useState(false)
+    const [modoCrearModulo, setModoCrearModulo] = useState(false)
+    const [modoConvenios, setModoConvenios] = useState(false)
     const [tituloDrawer, setTituloDrawer] = useState(null)
     const [request, setRequest] = useState(null)
     const [incluido, setIncluido] = useState(false)
@@ -73,11 +57,8 @@ const Modulos = props => {
     const [busqueda, setBusqueda] = useState("")
     const [dataPrestaciones, setDataPrestaciones] = useState([])
     const [actualizarData, setActualizarData] = useState(false)
-    const [conveniosSeleccionados, setConveniosSeleccionados] = useState([]);
-    const [requestImpactar, setRequestImpactar] = useState(null);
-
-    //setTitulo:
-    useEffect(() => setTituloHeader("Módulos"), []);
+    const [conveniosSeleccionados, setConveniosSeleccionados] = useState([])
+    const [requestImpactar, setRequestImpactar] = useState(null)
 
     //Pedir listado Modulos
     useEffect(() => {

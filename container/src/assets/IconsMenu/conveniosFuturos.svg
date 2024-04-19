@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19.869" height="23.999" viewBox="0 0 19.869 23.999">
+    <defs>
+        <style>
+            .cls-1{fill:#1473e6}
+        </style>
+    </defs>
+    <g id="timer" transform="translate(-6.5 -1.2)">
+        <path id="Trazado_37593" data-name="Trazado 37593" class="cls-1" d="M17.136 5.369V2.6h2.416a.7.7 0 1 0 0-1.4h-6.195a.7.7 0 1 0 0 1.4h2.416v2.769a9.915 9.915 0 1 0 1.364 0zm-.7 18.467a8.571 8.571 0 1 1 8.571-8.571 8.6 8.6 0 0 1-8.572 8.571z"/>
+        <path id="Trazado_37594" data-name="Trazado 37594" class="cls-1" d="M32.809 27.443h-4.442V23a.7.7 0 1 0-1.4 0v4.441H25.6a.7.7 0 0 0 0 1.4h1.364v1.364a.7.7 0 0 0 1.4 0v-1.4h4.441a.7.7 0 0 0 .7-.7.666.666 0 0 0-.696-.662z" transform="translate(-11.231 -12.879)"/>
+    </g>
+</svg>

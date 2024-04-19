@@ -9,11 +9,12 @@ import CustomTab from '../../../commons/Tab/tab'
 import ListadoContactos from './Tabs/ListadoContactos/ListadoContactos'
 
 
-const General = ({ setMiniMenu, proveedor, usuarioActivo })=> {
+const General = ({ proveedor, usuarioActivo })=> {
 
 
     const [data, setData] = useState(proveedor ? proveedor : null)
     const [prueba, setPrueba] = useState(false)
+    
     const idProveedor = data && data.idProveedor
 
     const tabs = [
@@ -35,10 +36,6 @@ const General = ({ setMiniMenu, proveedor, usuarioActivo })=> {
     ]
 
     useEffect(() => {
-        setMiniMenu(true)
-    }, [])
-
-    useEffect(() => {
         if (data && data.idTiposProveedor) {
             data.idTiposProveedor.forEach(item => {
                 if (item === 11) {
@@ -52,7 +49,7 @@ const General = ({ setMiniMenu, proveedor, usuarioActivo })=> {
 
     return (
         <ContenedorMenuProveedores>
-            <Grid container justify='center' alignItems='center' spacing={2} >
+            <Grid container justifyContent='center' alignItems='center' spacing={2} >
                 <Grid item xs={12}>
                     <CustomTab data={tabs} justificado={true} />
                 </Grid>

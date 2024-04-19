@@ -1,6 +1,6 @@
 const { merge } = require('webpack-merge')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const commonConfig = require('./webpack.common.js')
 const packageJson = require('../package.json')
@@ -33,6 +33,9 @@ const devConfig = {
     plugins: [
         new ModuleFederationPlugin({
             name: 'contrataciones',
+            remotes: {
+                callcenter: 'callcenter@http://localhost:8073/remoteEntry.js',
+            },
             filename: 'remoteEntry.js',
             exposes: {
                 './ContratacionesApp': './src/bootstrap' 

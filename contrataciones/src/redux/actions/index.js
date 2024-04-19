@@ -155,3 +155,9 @@ export {
     eliminarConvenioFuturo,
     guardarConvenioFuturo,
 } from './convenio'
+
+export {
+    setUsuarioActivo,
+    setRutas,
+    setRutasCallCenter,
+} from './generales'

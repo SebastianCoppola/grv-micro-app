@@ -2,7 +2,7 @@ import React, {useRef, useEffect} from 'react'
 import { mount } from 'contrataciones/ContratacionesApp'
 import { useHistory } from 'react-router-dom' 
 
-const ContratacionesApp = ({usuarioActivo}) => {
+const ContratacionesApp = ({usuarioActivo, rutas}) => {
     
     const ref = useRef(null)
     const history = useHistory()
@@ -16,6 +16,7 @@ const ContratacionesApp = ({usuarioActivo}) => {
             },
             initialPath: history.location.pathname,
             usuarioActivo,
+            rutas,
         })
         history.listen(onParentNavigate) 
     },[history])

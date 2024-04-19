@@ -10,18 +10,18 @@ import { CookiesProvider } from 'react-cookie'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
 const theme = createTheme({
-  typography: {
-    "textAlign": 'left',
-  },
-  palette: {
-    primary: {
-      main: '#1473e6',
-      secondary: '#4b4b4b',
+    typography: {
+        "textAlign": 'left',
     },
-    secondary: {
-      main: '#747474',
-    },
-  }
+    palette: {
+        primary: {
+            main: '#1473e6',
+            secondary: '#4b4b4b',
+        },
+        secondary: {
+            main: '#747474',
+        },
+    }
 })
 
 const App = () => {
@@ -33,6 +33,7 @@ const App = () => {
           <Routes>
             <Route path='/login' element={<Login/>}/>
             <Route path='/' element={<Navigate to='/login' replace />}/>
+            <Route path='/*' element={<Navigate to='/login' replace />}/>
           </Routes>
         </Router>
       </ThemeProvider>

@@ -1,0 +1,14 @@
+<svg id="SAS_MENU_proveedores" data-name="SAS MENU proveedores" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <defs>
+        <style>
+            .cls-2{fill:#fff}
+        </style>
+    </defs>
+    <path id="Rectángulo_147517" data-name="Rectángulo 147517" style="fill:none" d="M0 0h20v20H0z"/>
+    <g id="users" transform="translate(0 3.844)">
+        <path id="Trazado_37589" data-name="Trazado 37589" class="cls-2" d="M13.2 19.806a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0-6.867a2.864 2.864 0 1 1-2.861 2.861 2.868 2.868 0 0 1 2.861-2.861z" transform="translate(-6.621 -11.8)"/>
+        <path id="Trazado_37590" data-name="Trazado 37590" class="cls-2" d="M7.858 40.8a9.058 9.058 0 0 0-6.412 2.734.57.57 0 0 0 0 .814.6.6 0 0 0 .391.163.539.539 0 0 0 .391-.163 7.8 7.8 0 0 1 5.6-2.408 7.906 7.906 0 0 1 5.6 2.408.575.575 0 0 0 .814-.814A9.041 9.041 0 0 0 7.858 40.8z" transform="translate(-1.275 -31.362)"/>
+        <path id="Trazado_37591" data-name="Trazado 37591" class="cls-2" d="M43.078 26.956a2.278 2.278 0 1 0-2.278-2.278 2.285 2.285 0 0 0 2.278 2.278zm0-3.45a1.139 1.139 0 1 1-1.139 1.139 1.153 1.153 0 0 1 1.139-1.138z" transform="translate(-27.936 -18.95)"/>
+        <path id="Trazado_37592" data-name="Trazado 37592" class="cls-2" d="M47.739 42.639a6.9 6.9 0 0 0-6.539-1.627.568.568 0 1 0 .26 1.107 5.735 5.735 0 0 1 5.468 1.367.6.6 0 0 0 .391.163.6.6 0 0 0 .423-1.009z" transform="translate(-27.91 -31.346)"/>
+    </g>
+</svg>

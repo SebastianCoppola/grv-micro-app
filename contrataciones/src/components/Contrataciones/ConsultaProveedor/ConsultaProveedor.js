@@ -1,65 +1,46 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../Header/Header'
+//Components:
 import TablaProveedores from './TablaProveedores'
-//estilo
-import { makeStyles } from "@material-ui/core/styles";
-//material-ui
-import { Grid } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper'; import Filtros from '../../BuscadorFlotante/Filtros/Filtros';
-import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../../redux/actions/index';
+import Filtros from './Filtros/Filtros'
 import CustomSnackBar from '../../commons/SnackBar/CustomSnackBar'
-import CustomButton from '../../commons/Button/CustomButton';
+import CustomButton from '../../commons/Button/CustomButton'
+//Mui:
+import { Grid } from '@material-ui/core'
+import Paper from '@material-ui/core/Paper'
+import AddIcon from '@material-ui/icons/Add'
+//Redux:
+import { useSelector, useDispatch } from 'react-redux'
+import * as actions from '../../../redux/actions/index'
+//Assets:
 import IconExcel from '../../../commons/assets/Contrataciones/file-excel-box-outline.png'
-import AddIcon from '@material-ui/icons/Add';
-import { useHistory } from 'react-router-dom';
-import { ACTIVO, INACTIVO, MENSAJE_ERROR_MARCAR_VISTA, NOMBRE_EXCEL_EXPORTAR_PROVEEDORES, TITULOS_EXCEL_PROVEEDOR, TITULO_PROVEEDOR, ESTADO_PROVEEDOR_ACTIVO, TIPO_PRESTADOR_TODOS } from '../../../Utils/const';
+//Dom
+import { useHistory } from 'react-router-dom'
+//Utils:
+import { ACTIVO, INACTIVO, MENSAJE_ERROR_MARCAR_VISTA, NOMBRE_EXCEL_EXPORTAR_PROVEEDORES, TITULOS_EXCEL_PROVEEDOR, TITULO_PROVEEDOR, ESTADO_PROVEEDOR_ACTIVO, TIPO_PRESTADOR_TODOS } from '../../../Utils/const'
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1
-    },
-}));
+const ConsultaProveedor = ({ usuarioActivo, setProveedor }) => {
 
-const ConsultaProveedor = (props) => {
-    const { open2, setMiniMenu, setNavegacion, setTituloHeader, usuarioActivo, setProveedor } = props
-    const classes = useStyles(props);
-    const history = useHistory();
+    const history = useHistory()
     const dispatch = useDispatch()
+
     const dataBusquedaPrestador = useSelector(state => state.documentos.dataPrestadores)
     const cantidadTotal = useSelector(state => state.documentos && state.documentos.dataPrestadores && state.documentos.dataPrestadores.cantidadTotal
         ? state.documentos.dataPrestadores.cantidadTotal
         : 0)
+
     const [datos, setDatos] = useState({ estado: ESTADO_PROVEEDOR_ACTIVO, tipoProveedor: TIPO_PRESTADOR_TODOS })
-    const [idProv, setIDProv] = useState(null)
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(15);
-    const [openSnackBar, setOpenSnackBar] = useState({
-        open: false,
-        title: '',
-        severity: ''
-    });
+    const [page, setPage] = useState(0)
+    const [rowsPerPage, setRowsPerPage] = useState(15)
+    const [openSnackBar, setOpenSnackBar] = useState({open: false, title: '', severity: ''})
     const [timeoutId, setTimeoutId] = useState(null)
+    const [actualizarData, setActualizarData] = useState(false)
+    const [textPrimeraLinea, setTextPrimeraLinea] = useState([
+        { titulo: 'Razón Social- Nombre', nombre: 'razonSocial', value: null },
+        { titulo: 'Nombre de fantasía', nombre: 'nombreFantasia', value: null },
+        { titulo: 'CUIT', nombre: 'cuit', value: null },
+    ])
 
-    // const [selectPrimeraLinea, setSelectPrimeraLinea] = React.useState([
-    //     {
-    //         titulo: 'Estado', nombre: 'estado', value: null, id: 'id1', placeHolder: 'Todos',
-    //         data: dataEstado
-    //     },
-    //     {
-    //         titulo: "Provincia", grid: 3, nombre: 'idProvincia', value: null, id: 'id2',
-    //         placeHolder: 'Seleccionar Provincia', vista: true,
-    //         data: dataProvincia
-    //     },
-    // ])
-    // const prov = selectPrimeraLinea && selectPrimeraLinea.find((it) => it.nombre === 'idProvincia')
-
-    // useEffect(() => {
-    //     if (prov) {
-    //         setIDProv(prov && prov.value)
-    //     }
-    // }, [prov])
     useEffect(() => {
         dispatch(actions.getListadoProvinciaSelect())
         dispatch(actions.getListadoPrestadorMedicoTiposSelect())
@@ -71,18 +52,6 @@ const ConsultaProveedor = (props) => {
         dispatch(actions.clearDataConvenio())
     }, [])
 
-    const [textPrimeraLinea, setTextPrimeraLinea] = React.useState([
-        { titulo: 'Razón Social- Nombre', nombre: 'razonSocial', value: null },
-        { titulo: 'Nombre de fantasía', nombre: 'nombreFantasia', value: null },
-        { titulo: 'CUIT', nombre: 'cuit', value: null },
-    ])
-
-    useEffect(() => {
-        setMiniMenu(false)
-        setNavegacion(false)
-        setTituloHeader('Proveedores');
-    }, [])
-    const [actualizarData, setActualizarData] = React.useState(false)
     
     useEffect(() => {
         busquedaPrestador()
@@ -142,13 +111,14 @@ const ConsultaProveedor = (props) => {
             return;
         }
         setOpenSnackBar({ open: false });
-    };
+    }
 
     const handleNuevoProveedor = () => {
         history.push({
             pathname: '/home/altaProveedor'
         })
     }
+
     const handleExportar = () => {
         dispatch(actions.busquedaPrestador(datos, callbackDatosExportar))
     }
@@ -200,8 +170,8 @@ const ConsultaProveedor = (props) => {
     }
 
     return (
-        <div className={classes.root}>
-            <Grid container alignItems='center' justify='center' spacing={2} >
+        <>
+            <Grid container alignItems='center' justifyContent='center' spacing={2} >
                 <Grid item xs={12} >
                     <Paper elevation={0}>
                         <Grid item>
@@ -210,20 +180,17 @@ const ConsultaProveedor = (props) => {
                                 gridSelectPrimeraLinea={3}
                                 gridRadio={3}
                                 consulta={true}
-                                // selectPrimeraLinea={selectPrimeraLinea}
-                                // setSelectPrimeraLinea={setSelectPrimeraLinea}
                                 textPrimeraLinea={textPrimeraLinea}
                                 setTextPrimeraLinea={setTextPrimeraLinea}
                                 align={'flex-start'}
                                 datos={datos} setDatos={setDatos}
-                                idProv={idProv}
-                                openMenu={open2}
+                                idProv={null}
+                                openMenu={false}
                                 filtrosBuscadorFlotante={false}
                             />
                         </Grid>
                     </Paper>
                 </Grid>
-
                 <Grid container justify={'flex-end'} alignItems={'center'} alignContent={'flex-end'} item spacing={2}>
                     <Grid item >
                         <CustomButton
@@ -265,9 +232,10 @@ const ConsultaProveedor = (props) => {
                     open={openSnackBar.open}
                     title={openSnackBar.title}
                     vertical={'bottom'}
-                    severity={openSnackBar.severity} />
-                : null}
-        </div>
+                    severity={openSnackBar.severity} 
+                />
+            : null}
+        </>
     )
 }
 export default ConsultaProveedor

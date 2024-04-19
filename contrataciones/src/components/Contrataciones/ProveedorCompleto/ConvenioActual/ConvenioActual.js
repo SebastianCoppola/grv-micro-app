@@ -41,11 +41,12 @@ const useStyles = makeStyles({
     },
 })
 
-const ConvenioActual = props => {
-    const { setMiniMenu, proveedor, usuarioActivo } = props;
-    const classes = useStyles();
-    const history = useHistory();
-    const dispatch = useDispatch();
+const ConvenioActual = ({ proveedor, usuarioActivo }) => {
+
+    const classes = useStyles()
+    const history = useHistory()
+    const dispatch = useDispatch()
+    
     //Drawers:
     const [drawerNro, setDrawerNro] = useState(null)
     const [seleccion, setSeleccion] = useState(null)
@@ -80,7 +81,6 @@ const ConvenioActual = props => {
     useEffect(() => {
         dispatch(actions.clearDataConvenio())
         dispatch(actions.setRequestConvenio(null))
-        setMiniMenu(true)
         if (proveedor && proveedor.idProveedor) {
             dispatch(actions.getConvenioActual({ "idProveedor": proveedor.idProveedor }))
         }

@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react'
+//Redux:
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../../redux/actions/index'
-import { PRESTACION_NO_NOMENCLADA } from '../../../../Utils/const';
+//Components:
 import CustomPrestaciones from '../CustomPrestaciones'
 
-const PrestacionesNoNomencladas = props => {
-    const { setTituloHeader } = props;
-    const dispatch = useDispatch();
+const PrestacionesNoNomencladas = () => {
+
+    const dispatch = useDispatch()
+
     const dataNoNomencladas = useSelector(state => state.prestaciones.prestacionesNoNomencladas)
+
     const [request, setRequest] = useState(null)
     const [requestListar, setRequestListar] = useState(null)
     const [requestIncluir, setRequestIncluir] = useState(null)
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [page, setPage] = useState(0)
+    const [rowsPerPage, setRowsPerPage] = useState(5)
     const [data, setData] = useState({ objetos: [] })
     const [tipoOrdenamiento, setTipoOrdenamiento] = useState(1)
     const [criterioOrdenamiento, setCriterioOrdenamiento] = useState(1)
@@ -20,10 +23,6 @@ const PrestacionesNoNomencladas = props => {
     const [updateTable, setUpdateTable] = useState(false)
 
     useEffect(() => setData(dataNoNomencladas), [dataNoNomencladas])
-
-    useEffect(() => {
-        setTituloHeader(PRESTACION_NO_NOMENCLADA);
-    }, []);
 
     useEffect(() => {
         let requestListar = {

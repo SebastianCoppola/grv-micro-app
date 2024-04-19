@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
 //Components: 
 import ContenedorMenuProveedores from '../ContenedorMenuProveedores'
-import CustomConvenioHF from '../CustomConvenioHF/CustomConvenioHF';
-import ConvenioFuturoEditar from './ConvenioFuturoEditar';
-import CustomCardConvenios from '../CustomConvenioHF/CustomCardConvenios';
-import Loader from '../../../commons/Loading/Loader';
-import CustomSnackBar from '../../../commons/SnackBar/CustomSnackBar';
+import CustomConvenioHF from '../CustomConvenioHF/CustomConvenioHF'
+import ConvenioFuturoEditar from './ConvenioFuturoEditar'
+import CustomCardConvenios from '../CustomConvenioHF/CustomCardConvenios'
+import Loader from '../../../commons/Loading/Loader'
+import CustomSnackBar from '../../../commons/SnackBar/CustomSnackBar'
+import CustomAlert from '../../../commons/CustomAlert/customAlert'
 //Material:
-import { Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core'
 //Redux:
-import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../../../redux/actions/index';
-import CustomAlert from '../../../commons/CustomAlert/customAlert';
+import { useSelector, useDispatch } from 'react-redux'
+import * as actions from '../../../../redux/actions/index'
 
-const ConveniosFuturos = props => {
-    const { setMiniMenu, proveedor, usuarioActivo } = props;
+const ConveniosFuturos = ({ proveedor, usuarioActivo }) => {
+
     //Alert && SnackBar:
     const [openAlert, setOpenAlert] = useState(false)
     const [openSnackBar, setOpenSnackBar] = useState({ "open": false, "title": '', "severity": '' });
@@ -32,7 +32,6 @@ const ConveniosFuturos = props => {
 
     //Busco los convenios asociados al proveedor:
     useEffect(() => {
-        setMiniMenu(true)
         let req = { idProveedor: proveedor && proveedor.idProveedor && proveedor.idProveedor }
         dispatch(actions.getConveniosFuturos(req))
         dispatch(actions.setRequestConvenio(null))

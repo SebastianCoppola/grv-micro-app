@@ -6,7 +6,7 @@ import store from './redux/store'
 import { Provider } from 'react-redux' 
 
 //Mount function to start up the App:
-const mount = (rootElement, { onNavigate, defaultHistory, initialPath, usuarioActivo }) => {
+const mount = (rootElement, { onNavigate, defaultHistory, initialPath, usuarioActivo, rutas }) => {
     
     const history = defaultHistory || createMemoryHistory({
         initialEntries: [initialPath]
@@ -18,7 +18,12 @@ const mount = (rootElement, { onNavigate, defaultHistory, initialPath, usuarioAc
     
     ReactDOM.render(
         <Provider store={store}>
-            <App usuarioActivo={usuarioActivo} history={history}/>
+            <App 
+                usuarioActivo={usuarioActivo} 
+                history={history} 
+                rutasProveedores={rutas.rutasProveedores} 
+                rutasCallCenter={rutas.rutasCallCenter}
+            />
         </Provider>,
         rootElement
     )

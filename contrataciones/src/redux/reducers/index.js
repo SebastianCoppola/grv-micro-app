@@ -10,6 +10,7 @@ import importarExportar from './importarExportar'
 import moduloConvenio from './moduloConvenio'
 import prestaciones from './prestaciones'
 import convenio from './convenio'
+import generales from './generales'
 
 export default combineReducers({
     listados: listados,
@@ -22,4 +23,5 @@ export default combineReducers({
     moduloConvenio: moduloConvenio,
     prestaciones: prestaciones,
     convenio: convenio,
+    generales: generales
 })

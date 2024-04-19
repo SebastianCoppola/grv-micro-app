@@ -13,7 +13,17 @@ module.exports = {
                         plugins: ['@babel/plugin-transform-runtime'],
                     }
                 }
-            }
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                exclude: /node_modules/,
+                use: ['file-loader'],
+            },
+            {
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
         ]
     },
     plugins: [

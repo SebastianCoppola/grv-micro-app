@@ -1,18 +1,26 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router';
-import jwt_decode from "jwt-decode";
-import { Alert, Container, Grid, Snackbar } from '@mui/material';
+import React, { useState, useEffect, useRef } from 'react'
+//Router:
+import { useNavigate } from 'react-router'
+//Jwt:
+import jwt_decode from "jwt-decode"
+//Mui:
+import { Alert, Container, Grid, Snackbar } from '@mui/material'
+import { Box } from '@mui/system'
+//Icons:
 import PNGLogin from '../../commons/assets/login.png'
-import Utils from '../utils/utils';
-import { ERROR_ENVIAR_MAIL, ERROR_SERVICIO_LOGIN, EXITO_ENVIAR_MAIL, MENSAJE_INGRESO_EXITOSO, SNACK_ERROR, SNACK_SUCCESS, USUARIO_SIN_PERMISOS } from '../utils/const';
 import isoLogo from '../../commons/assets/isologoColoniaSuiza.svg'
-import CustomLoading from '../commons/Loading/CustomLoading';
-import CustomText from '../commons/TextField/CustomText';
-import CustomButton from '../commons/Button/CustomButton';
-import { FECTH_URL_LOGIN, FETCH_URL_FACE_RECOGNITION_VALIDATE, URL_FETCH_MAIL_SOPORTE, URL_FRONT_UI } from '../utils/url';
-import CustomTypography from '../commons/Typography/CustomTypography';
-import { Box } from '@mui/system';
 import Lampara from "../login/lampara.svg"
+//Utils:
+import Utils from '../utils/utils'
+import { ERROR_ENVIAR_MAIL, ERROR_SERVICIO_LOGIN, EXITO_ENVIAR_MAIL, MENSAJE_INGRESO_EXITOSO, SNACK_ERROR, 
+    SNACK_SUCCESS, USUARIO_SIN_PERMISOS } from '../utils/const'
+//Components:
+import CustomLoading from '../commons/Loading/CustomLoading'
+import CustomText from '../commons/TextField/CustomText'
+import CustomButton from '../commons/Button/CustomButton'
+import CustomTypography from '../commons/Typography/CustomTypography'
+//URLS:
+import { FECTH_URL_LOGIN, FETCH_URL_FACE_RECOGNITION_VALIDATE, URL_FETCH_MAIL_SOPORTE, URL_FRONT_UI } from '../utils/url';
 
 const classes = {
     root: {
@@ -107,34 +115,35 @@ const classes = {
     }
 }
 
-const Login = (props) => {
+const Login = () => {
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+
+    const videoRef = useRef(null)
+    
     const [user, setUser] = useState('')
     const [pwd, setPwd] = useState('')
-    const [loading, setLoading] = useState(false)
     const [loadingEffect, setLoadingEffect] = useState(false)
-    const videoRef = useRef(null)
     const [openRecognition, setOpenRecognition] = useState(false)
     const [valid, setValid] = useState(true)
     const [openSnackBar, setOpenSnackBar] = useState({ open: false, title: '', severity: '', button: false })
     const [intentos, setIntentos] = useState(0)
     const [disabledButton, setDisabledButton] = useState(false)
 
-    useEffect(() => { setDisabledButton(Boolean(!user || !pwd)) }, [user, pwd])
+    useEffect(() => { 
+        setDisabledButton(Boolean(!user || !pwd)) 
+    }, [user, pwd])
 
     //Llamada para mail de soporte en caso que no pueda entrar por reconocimiento facial
     const handleEnviarMailSoporte = () => {
         if (user) {
-            let request = {
-                usuario: user
-            }
             setLoadingEffect(true)
             fetch(URL_FETCH_MAIL_SOPORTE, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(request)
-            }).then(res => res.json()
+                body: JSON.stringify({usuario: user})
+            })
+            .then(res => res.json()
                 .then(data => {
                     if (data.status === 200) {
                         setLoadingEffect(false)
@@ -154,7 +163,8 @@ const Login = (props) => {
                         })
                     }
                 })
-            ).catch(err => {
+            )
+            .catch(err => {
                 console.log(err)
             })
         }
@@ -184,17 +194,17 @@ const Login = (props) => {
         setLoadingEffect(false)
         let token = localStorage.getItem('jwtuser')
         if (token) {
-            let decodedToken = jwt_decode(token);
-            let currentDate = new Date();
+            let decodedToken = jwt_decode(token)
+            let currentDate = new Date()
             if (decodedToken.exp * 1000 < currentDate.getTime()) {
-                navigate(`/login`);
-                localStorage.removeItem("jwtuser")
+                navigate('/login')
+                localStorage.removeItem('jwtuser')
             } else {
-                var userin = JSON.parse(localStorage.getItem('userin'));
+                var userin = JSON.parse(localStorage.getItem('userin'))
                 if (Utils.usuarioConPermisos(userin.roles)) {
-                    let url = URL_FRONT_UI;
-                    url += `/home/?token=${token}&userName=${userin.username}&id=${userin.id}&firstName=${userin.firstName}&lastName=${userin.lastName}&roles=${userin.roles}&apps=${userin.apps}&area=${userin.area}`;
-                    window.location.replace(url);
+                    let url = URL_FRONT_UI
+                    url += `/?token=${token}&userName=${userin.username}&id=${userin.id}&firstName=${userin.firstName}&lastName=${userin.lastName}&roles=${userin.roles}&apps=${userin.apps}&area=${userin.area}`
+                    window.location.replace(url)
                 } else {
                     setOpenSnackBar({
                         open: true,
@@ -204,8 +214,8 @@ const Login = (props) => {
                 }
             }
         } else {
-            navigate(`/login`)
-            localStorage.removeItem("jwtuser")
+            navigate('/login')
+            localStorage.removeItem('jwtuser')
         }
         setLoadingEffect(false)
     }, [])
@@ -213,90 +223,62 @@ const Login = (props) => {
     //Llamada para verificar si el usuario necesita reconocimiento facial o no
     const verifyFaceRecognitionRequired = () => {
         if (user && user !== '' && pwd && pwd !== '') {
-            let req = {
-                user: user.trim(),
-                password: pwd.trim()
-            }
+            let req = { user: user.trim(), password: pwd.trim()}
             setLoadingEffect(true)
-            console.log(process.env.REACT_APP_URL_SERVICIOS)
             fetch(FETCH_URL_FACE_RECOGNITION_VALIDATE, {
-            //fetch('http://10.8.100.166:8443/grv/login/login/verify-face-recognition-required', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(req)
-            }).then(res =>
-                res.json()
-                    .then(data => {
-                        if (data && data.status && data.status === 500) {
-                            setLoadingEffect(false)
-                            setOpenSnackBar({
-                                open: true,
-                                severity: SNACK_ERROR,
-                                title: USUARIO_SIN_PERMISOS,
-                                button: false
-                            })
-                        }
-                        if (data && data.user && data.user.faceRecognitionRequired === false) {
-                            setDisabledButton(true)
-                            setTimeout(function () {
-                                setOpenSnackBar({
-                                    open: true,
-                                    severity: SNACK_SUCCESS,
-                                    title: MENSAJE_INGRESO_EXITOSO,
-                                    button: false
-                                })
-                                setLoadingEffect(false)
-                                setOpenRecognition(false);
-
-                                let datosUsuario = {
-                                    token: data.access_token,
-                                    user: data.user.username,
-                                    id: data.user.id,
-                                    firstName: data.user.firstName,
-                                    lastName: data.user.lastName,
-                                    roles: data.user.roles,
-                                    apps: data.user.apps,
-                                    area: data.user.area,
-                                    idGrupo:data && data.user && data.user.idGrupo 
-                                }
-                                //Redireccion a fronts
-                                document.cookie = "datos_usuario=" + JSON.stringify(datosUsuario)
-                                document.cookie = "user_image=" + JSON.stringify(data.user_image)
-                                Utils.verificarAreaUsuarioLogueadoYRedireccion(datosUsuario)
-                            }, 5000);
-                        } else {
-                            if (data && data.status && data.status !== 200) {
-                                setLoadingEffect(false)
-                                setOpenSnackBar({
-                                    open: true,
-                                    severity: SNACK_ERROR,
-                                    title: "Hubo un error, intente nuevamente.",
-                                    button: false
-                                })
-                            } else {
-                                setTimeout(function () {
-                                    if (user && user !== '' && pwd && pwd !== '') {
-                                        pythonCall();
-                                        setOpenRecognition(true);
-                                    } else {
-                                        setValid(false)
-                                    }
-                                }, 5000)
-                            }
-                        }
-                    }).catch(err => {
-                        setIntentos(intentos + 1)
-                        setLoading(false)
+            })
+            .then(res => res.json()
+                .then(data => {
+                    if (data && data.status && data.status === 500) {
+                        setLoadingEffect(false)
                         setOpenSnackBar({
                             open: true,
                             severity: SNACK_ERROR,
-                            title: ERROR_SERVICIO_LOGIN,
+                            title: USUARIO_SIN_PERMISOS,
                             button: false
                         })
+                    }
+                    if (data && data.user && data.user.faceRecognitionRequired === false) {
+                        setDisabledButton(true)
+                        setTimeout(function () {
+                            setOpenSnackBar({open: true, severity: SNACK_SUCCESS, title: MENSAJE_INGRESO_EXITOSO, button: false})
+                            setLoadingEffect(false)
+                            setOpenRecognition(false)
+                            document.cookie = "datos_usuario=" + JSON.stringify({token: data.access_token})
+                            document.cookie = "user_image=" + JSON.stringify(data.user_image)
+                            Utils.verificarAreaUsuarioLogueadoYRedireccion(data.user.apps)
+                        }, 5000)
+                    } else {
+                        if (data && data.status && data.status !== 200) {
+                            setLoadingEffect(false)
+                            setOpenSnackBar({open: true, severity: SNACK_ERROR, title: "Hubo un error, intente nuevamente.", button: false})
+                        } else {
+                            setTimeout(function () {
+                                if (user && user !== '' && pwd && pwd !== '') {
+                                    pythonCall()
+                                    setOpenRecognition(true)
+                                } else {
+                                    setValid(false)
+                                }
+                            }, 5000)
+                        }
+                    }
+                })
+                .catch(() => {
+                    setIntentos(intentos + 1)
+                    setOpenSnackBar({
+                        open: true,
+                        severity: SNACK_ERROR,
+                        title: ERROR_SERVICIO_LOGIN,
+                        button: false
                     })
-            ).catch(() => {
+                })
+            )
+            .catch(() => {
                 setIntentos(intentos + 1)
-                setLoading(false)
                 setOpenSnackBar({
                     open: true,
                     severity: SNACK_ERROR,
@@ -311,9 +293,7 @@ const Login = (props) => {
     const getVideo = () => {
         navigator
             .mediaDevices
-            .getUserMedia({
-                video: true
-            })
+            .getUserMedia({ video: true })
             .then(stream => {
                 let video = videoRef.current
                 if ("srcObject" in video) {
@@ -326,93 +306,73 @@ const Login = (props) => {
 
     //Sacar foto a partir de la camara
     const getScreenshotFromCameraBlob = () => {
-        const canvas = document.createElement('canvas');
-        const video = document.createElement('video');
-        video.setAttribute("autoplay", true);
+        const canvas = document.createElement('canvas')
+        const video = document.createElement('video')
+        video.setAttribute("autoplay", true)
         return new Promise((resolve, reject) => navigator.mediaDevices
-            .getUserMedia({
-                video: true
-            })
+            .getUserMedia({video: true})
             .then((stream) => {
-                if ("srcObject" in video) {
-                    video.srcObject = stream;
-                } else {
-                    video.src = window.URL.createObjectURL(stream);
-                }
+                if ("srcObject" in video) video.srcObject = stream
+                else video.src = window.URL.createObjectURL(stream)
                 video.addEventListener("loadeddata", () => {
-                    canvas.width = video.videoWidth;
-                    canvas.height = video.videoHeight;
-                    var ctx = canvas.getContext('2d');
-                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                    canvas.toBlob(resolve, 'image/png');
+                    canvas.width = video.videoWidth
+                    canvas.height = video.videoHeight
+                    var ctx = canvas.getContext('2d')
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+                    canvas.toBlob(resolve, 'image/png')
                 })
             })
             .catch(reject)
         )
     }
 
-    //Llamada a la URI si todo sale ok lo setea los parametros necesarios en document.cookie, con foto para
-    //reconocimiento facial.
+    //Llamada a la URI si todo sale ok lo setea los parametros necesarios en document.cookie, con foto para reconocimiento facial.
     const pythonCall = () => {
         setLoadingEffect(false)
         getScreenshotFromCameraBlob()
             .then((blob) => {
-                const formData = new FormData();
-                formData.append("file", blob);
-                formData.append("user", user.trim());
-                formData.append("password", pwd.trim());
-                let url = FECTH_URL_LOGIN;
+                const formData = new FormData()
+                formData.append("file", blob)
+                formData.append("user", user.trim())
+                formData.append("password", pwd.trim())
+                let url = FECTH_URL_LOGIN
                 fetch(url, {
                     method: 'POST',
                     body: formData
                 })
-                    .then((response) => {
-                        response.json()
-                            .then(data => {
-                                if (data && data.access_token && data.user) {
-                                    setDisabledButton(true)
-                                    setOpenSnackBar({
-                                        open: true,
-                                        severity: SNACK_SUCCESS,
-                                        title: MENSAJE_INGRESO_EXITOSO,
-                                        button: false
-                                    })
-                                    if (Utils.usuarioConPermisos(data.user.roles)) {
-                                        setTimeout(function () {
-                                            setOpenRecognition(false);
-                                            let datosUsuario = {
-                                                token: data.access_token,
-                                                user: data.user.username,
-                                                id: data.user.id,
-                                                firstName: data.user.firstName,
-                                                lastName: data.user.lastName,
-                                                roles: data.user.roles,
-                                                apps: data.user.apps,
-                                                area: data.user.area,
-                                                idGrupo:data && data.user && data.user.idGrupo 
-                                            }
-                                            //Redireccion a fronts
-                                            document.cookie = "datos_usuario=" + JSON.stringify(datosUsuario)
-                                            document.cookie = "user_image=" + JSON.stringify(data.user_image)
-                                            Utils.verificarAreaUsuarioLogueadoYRedireccion(datosUsuario)
-                                        }, 5000);
+                .then((response) => {
+                    response.json()
+                        .then(data => {
+                            if (data && data.access_token && data.user) {
+                                setDisabledButton(true)
+                                setOpenSnackBar({
+                                    open: true,
+                                    severity: SNACK_SUCCESS,
+                                    title: MENSAJE_INGRESO_EXITOSO,
+                                    button: false
+                                })
+                                if (Utils.usuarioConPermisos(data.user.roles)) {
+                                    setTimeout(function () {
+                                        setOpenRecognition(false);
+                                        let datosUsuario = {
+                                            token: data.access_token,
+                                            user: data.user.username,
+                                            id: data.user.id,
+                                            firstName: data.user.firstName,
+                                            lastName: data.user.lastName,
+                                            roles: data.user.roles,
+                                            apps: data.user.apps,
+                                            area: data.user.area,
+                                            idGrupo:data && data.user && data.user.idGrupo 
+                                        }
+                                        //Redireccion a fronts
+                                        document.cookie = "datos_usuario=" + JSON.stringify(datosUsuario)
+                                        document.cookie = "user_image=" + JSON.stringify(data.user_image)
+                                        Utils.verificarAreaUsuarioLogueadoYRedireccion(datosUsuario)
+                                    }, 5000);
 
-                                    } else {
-                                        setOpenRecognition(false)
-                                        setIntentos(intentos + 1)
-                                        //Apago la camara por si hubo error
-                                        navigator
-                                            .mediaDevices
-                                            .getUserMedia({
-                                                video: true
-                                            })
-                                            .then(stream => {
-                                                stream.getTracks()
-                                                    .forEach(track => track.stop());
-                                            })
-
-                                    }
                                 } else {
+                                    setOpenRecognition(false)
                                     setIntentos(intentos + 1)
                                     //Apago la camara por si hubo error
                                     navigator
@@ -424,37 +384,48 @@ const Login = (props) => {
                                             stream.getTracks()
                                                 .forEach(track => track.stop());
                                         })
+
                                 }
-                                setLoading(false)
-                                setTimeout(function () {
-                                    setOpenRecognition(false);
-                                }, 5000);
-                            })
-                    })
-                    .catch(err => {
-                        console.log(err)
-                        setIntentos(intentos + 1)
-                        setLoading(false)
-                        setOpenSnackBar({
-                            open: true,
-                            severity: SNACK_ERROR,
-                            title: ERROR_SERVICIO_LOGIN,
-                            button: false
+                            } else {
+                                setIntentos(intentos + 1)
+                                //Apago la camara por si hubo error
+                                navigator
+                                    .mediaDevices
+                                    .getUserMedia({
+                                        video: true
+                                    })
+                                    .then(stream => {
+                                        stream.getTracks()
+                                            .forEach(track => track.stop());
+                                    })
+                            }
+                            setTimeout(function () {
+                                setOpenRecognition(false);
+                            }, 5000);
                         })
-                        setTimeout(function () {
-                            setOpenRecognition(false);
-                        }, 5000);
-                        //Apago la camara por si hubo error
-                        navigator
-                            .mediaDevices
-                            .getUserMedia({
-                                video: true
-                            })
-                            .then(stream => {
-                                stream.getTracks()
-                                    .forEach(track => track.stop());
-                            })
+                })
+                .catch(() => {
+                    setIntentos(intentos + 1)
+                    setOpenSnackBar({
+                        open: true,
+                        severity: SNACK_ERROR,
+                        title: ERROR_SERVICIO_LOGIN,
+                        button: false
                     })
+                    setTimeout(function () {
+                        setOpenRecognition(false);
+                    }, 5000);
+                    //Apago la camara por si hubo error
+                    navigator
+                        .mediaDevices
+                        .getUserMedia({
+                            video: true
+                        })
+                        .then(stream => {
+                            stream.getTracks()
+                                .forEach(track => track.stop());
+                        })
+                })
             })
             .catch(error => {
                 console.log(error)

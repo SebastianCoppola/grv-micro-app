@@ -34,6 +34,7 @@ const devConfig = {
             remotes: {
                 login: 'login@http://localhost:8071/remoteEntry.js',
                 contrataciones: 'contrataciones@http://localhost:8072/remoteEntry.js',
+                callcenter: 'callcenter@http://localhost:8073/remoteEntry.js',
             },
             shared: packageJson.dependencies, 
         }),

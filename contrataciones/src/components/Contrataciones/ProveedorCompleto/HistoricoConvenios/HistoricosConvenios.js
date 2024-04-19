@@ -13,8 +13,8 @@ import CustomConvenioHF from '../CustomConvenioHF/CustomConvenioHF';
 import { restaurarRevision } from '../../../../redux/actions/convenio';
 import CustomSnackBar from '../../../commons/SnackBar/CustomSnackBar';
 
-const HistoricosConvenios = props => {
-    const { setMiniMenu, proveedor, usuario } = props;
+const HistoricosConvenios = ({ proveedor, usuario }) => {
+
     //Convenio seleccionado:
     const [convenioSeleccionado, setConvenioSeleccionado] = useState({})
     //Modal restaurar versión:
@@ -35,7 +35,6 @@ const HistoricosConvenios = props => {
 
 
     useEffect(() => {
-        setMiniMenu(true)
         let req = { idProveedor: proveedor && proveedor.idProveedor && proveedor.idProveedor }
         dispatch(actions.getConvenioHistorico(req))
     }, [])

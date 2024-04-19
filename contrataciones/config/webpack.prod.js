@@ -16,6 +16,9 @@ const prodConfig = {
             exposes: {
                 './ContratacionesApp': './src/bootstrap' 
             },
+            remotes: {
+                callcenter: `callcenter@${domain}/callcenter/latest/remoteEntry.js`,
+            },
             shared: packageJson.dependencies
         }),
     ]

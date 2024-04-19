@@ -1,7 +1,6 @@
 {
-  "name": "grv-frontend",
-  "version": "0.1.0",
-  "homepage": "/home",
+  "name": "grv-contrataciones",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
